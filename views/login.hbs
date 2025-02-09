@@ -1,0 +1,88 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; } body { font-family:
+      Arial, sans-serif; background-color: #f4f4f4; display: flex;
+      justify-content: center; align-items: center; height: 100vh; }
+      .login-container { background-color: #fff; padding: 40px; border-radius:
+      8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width: 100%; max-width:
+      400px; } h2 { text-align: center; margin-bottom: 20px; font-size: 24px;
+      color: #333; } .input-group { margin-bottom: 20px; } .input-group label {
+      display: block; font-size: 14px; margin-bottom: 5px; color: #555; }
+      .input-group input { width: 100%; padding: 10px; font-size: 14px; border:
+      1px solid #ccc; border-radius: 4px; } .password-field { position:
+      relative; } .eye-icon { position: absolute; right: 10px; top: 50%;
+      transform: translateY(-50%); cursor: pointer; } .eye-icon i { font-size:
+      18px; color: #555; } .login-btn { width: 100%; padding: 12px;
+      background-color: #4CAF50; color: white; font-size: 16px; border: none;
+      border-radius: 4px; cursor: pointer; } .login-btn:hover {
+      background-color: #45a049; } .links { text-align: center; margin-top:
+      15px; } .links a { display: inline-block; font-size: 14px; color: #007BFF;
+      text-decoration: none; margin: 5px; } .links a:hover { text-decoration:
+      underline; } @media (min-width: 768px) { .login-container { max-width:
+      500px; padding: 50px; } h2 { font-size: 28px; } .login-btn { padding:
+      15px; font-size: 18px; } } input[type=password]::-ms-reveal,
+      input[type=password]::-ms-clear { display: none; } input{outline: none;}
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <form class="login-form">
+        <h2>Login Here</h2>
+
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="emailOfUser"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password</label>
+          <div class="password-field">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              required
+            />
+            <span class="eye-icon" onclick="togglePassword()"><i
+                class="fas fa-eye"
+                id="eye-icon"
+              ></i></span>
+          </div>
+        </div>
+
+        <button type="submit" class="login-btn">Login</button>
+
+        <div class="links">
+          <a href="/auth/forgetPassword" class="forgot-password">Forgot Password?</a>
+          <a href="/auth/register" class="create-account">Create Account</a>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      function togglePassword() { const passwordField =
+      document.getElementById('password'); const eyeIcon =
+      document.getElementById('eye-icon'); const type = passwordField.type ===
+      'password' ? 'text' : 'password'; passwordField.type = type; if (type ===
+      'password') { eyeIcon.classList.remove('fa-eye-slash');
+      eyeIcon.classList.add('fa-eye'); } else {
+      eyeIcon.classList.remove('fa-eye'); eyeIcon.classList.add('fa-eye-slash');
+      } }
+    </script>
+  </body>
+</html>
