@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 import { v4 } from "uuid";
 import response from "../functions/Response.js";
+import sendEmailtoUser from "../functions/SendEmail.js";
 
 class AuthService {
   async loginUser(args) {
@@ -53,7 +54,17 @@ class AuthService {
 
   async forgetPassword(args) {
     try {
-      
+      const isEmailExist = await User.findOne({ emailOfUser:args?.emailOfUser });
+      if(isEmailExist?.emailOfUser){
+        const response = await sendEmailtoUser(
+          isEmailExist?.emailOfUser,
+          isEmailExist?.nameOfUser,
+          isEmailExist?.userId
+        );
+        return response
+      }else{
+        return response(401,"Email not exist !!!")
+      }
     } catch (error) {
       console.log("Error occurred at forget password service !!!", error);
       response(500, "Internal server error !!!");

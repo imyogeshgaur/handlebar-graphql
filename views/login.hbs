@@ -41,20 +41,17 @@
           <label for="email">Email</label>
           <input
             type="email"
-            id="emailOfUser"
-            name="email"
+            id="email"
             placeholder="Enter your email"
             required
           />
         </div>
-
         <div class="input-group">
           <label for="password">Password</label>
           <div class="password-field">
             <input
               type="password"
               id="password"
-              name="password"
               placeholder="Enter your password"
               required
             />
@@ -64,9 +61,7 @@
               ></i></span>
           </div>
         </div>
-
-        <button type="submit" class="login-btn">Login</button>
-
+        <button type="submit" class="login-btn" id="login-submit-btn">Login</button>
         <div class="links">
           <a href="/auth/forgetPassword" class="forgot-password">Forgot Password?</a>
           <a href="/auth/register" class="create-account">Create Account</a>
@@ -75,14 +70,35 @@
     </div>
 
     <script>
-      function togglePassword() { const passwordField =
-      document.getElementById('password'); const eyeIcon =
-      document.getElementById('eye-icon'); const type = passwordField.type ===
-      'password' ? 'text' : 'password'; passwordField.type = type; if (type ===
-      'password') { eyeIcon.classList.remove('fa-eye-slash');
-      eyeIcon.classList.add('fa-eye'); } else {
-      eyeIcon.classList.remove('fa-eye'); eyeIcon.classList.add('fa-eye-slash');
-      } }
+      function togglePassword() { 
+        const passwordField = document.getElementById('password'); 
+        const eyeIcon = document.getElementById('eye-icon'); 
+        const type = passwordField.type ==='password' ? 'text' : 'password'; 
+        passwordField.type = type; 
+        if (type ==='password') {
+          eyeIcon.classList.remove('fa-eye-slash');
+          eyeIcon.classList.add('fa-eye'); 
+        } else {
+          eyeIcon.classList.remove('fa-eye'); eyeIcon.classList.add('fa-eye-slash');
+        } 
+      }
+
+      document.getElementById("login-submit-btn").addEventListener("click",async(event)=>{
+        try{
+          event.preventDefault()
+          const emailOfUser = document.getElementById("email")?.value;
+          const password = document.getElementById("password")?.value;
+          await fetch(`{{url}}/auth/login`,{
+            method:"POST",
+            headers:{ "Content-Type": "application/json" },
+            body:JSON.stringify({emailOfUser,password})
+          }).then((res)=>res.json()).then((data)=>{
+            console.log(data)
+          })
+        }catch(error){
+          console.log("Error in sending data to express : ",error) 
+        }
+      })
     </script>
   </body>
 </html>

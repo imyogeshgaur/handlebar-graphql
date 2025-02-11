@@ -21,11 +21,13 @@ app.set("views", "./views");
 app.set("view engine",'hbs')
 
 
+
 app.get("/",(_,res)=>{
     try {
-        res.render("login")
+        res.render("login",{url:`http://localhost:${process?.env?.PORT}`})
     } catch (error) {
         console.log("Error in rendering login page : ",error);
+        response(500, "Internal server error !!!");
     }
 })
 

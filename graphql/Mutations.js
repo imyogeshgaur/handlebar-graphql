@@ -23,3 +23,11 @@ export const LOGIN_USER_MUTATION = gql`
   }
 `;
 
+export const FORGET_PASSWORD_MUTATION = gql`
+  mutation ForgetPassword($emailOfUser: String!) {
+    forgetPassword(emailOfUser: $emailOfUser) {
+      statusCode
+      message
+    }
+  }
+`;
